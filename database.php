@@ -1,13 +1,4 @@
 <?php
-
-// $conn = mysqli_connect($hostname, $username, $password, $db_name);
-
-// if (!$conn) {
-//     die('Error in database connection ' . mysqli_connect_error());
-// }
-
-// echo 'Connect successfully';
-
 class Database {
 	private $hostname;
 	private $username;
@@ -46,12 +37,11 @@ class Database {
 	public function runUpdate($sql = "") {
 		if ($sql != "") {
 			$query = $this->conn->prepare($sql);
-			$query->execute();
-			$lastInsertId = $this->conn->lastInsertId();
+			$result = $query->execute();
 
 			$this->conn = null;
 
-			return $lastInsertId;
+			return $result;
 		} else {
 			return 0;
 		}

@@ -1,13 +1,13 @@
 <?php
-include 'database.php';
-
-$dataDase = new Database();
 $dataDase->connect();
 
-$sql = "SELECT * FROM `users`";
+$sql = "SELECT users.*, work_centers.name AS work_center_name 
+        FROM users 
+        INNER JOIN work_centers ON users.work_center_id = work_centers.id
+        ORDER BY users.id";
 
-$result = $dataDase->runQuery($sql);
+$users = $dataDase->runQuery($sql);
 
-if (!$result) {
-    echo 'Failure to obtain users';
+if (!$users) {
+  echo 'Failure to obtain users';
 }

@@ -1,5 +1,5 @@
 <?php
-include 'db_conn.php';
+include 'actions/actGetUsers.php';
 ?>
 
 <!DOCTYPE html>
@@ -60,12 +60,8 @@ include 'db_conn.php';
 			</thead>
 			<tbody>
 				<?php
-				$sql = "SELECT * FROM `users`";
-				$result = mysqli_query($conn, $sql);
-
-				while ($user = mysqli_fetch_assoc($result)) {
-					?>
-
+				foreach ($result as $i => $user) {
+				?>
 					<tr>
 						<th scope="row"><?= $user['id'] ?></th>
 						<td><?= $user['name'] ?></td>
@@ -77,10 +73,8 @@ include 'db_conn.php';
 						</td>
 					</tr>
 					<tr>
-
-						<?php
+				<?php
 				}
-
 				?>
 			</tbody>
 		</table>
